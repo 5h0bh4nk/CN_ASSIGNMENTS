@@ -17,15 +17,22 @@ int cntf = 3 , cntr = 0;
 void Lefthandler(int sig, siginfo_t* si, void *uc){
     left = si->si_pid;
     printf("RECEIVED SIGNAL in P1 FROM P4 : %d\n", si->si_pid);
-    if(right!=-1 && cntf>0){
+    if(right!=-1 && cntf>=0){
         cntf--;
         kill(right, SIGUSR1);
+    }
+    if(cntf==-1){
+        kill(left, SIGUSR2);
     }
 }
 
 void Righthandler(int sig, siginfo_t* si, void *uc){
     right = sig;
     printf("RECEIVED SIGNAL in P2 FROM RIGHT : %d\n", sig);
+    if(left!=-1 && cntr>0){
+        cntr--;
+        kill(left, SIGUSR1);
+    }
 }
   
 int main()

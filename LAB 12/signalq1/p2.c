@@ -14,18 +14,16 @@ int left = -1, right = -1, cntf =3, cntr =0;
 
 void Lefthandler(int sig, siginfo_t* si, void *uc){
     left = si->si_pid;
-    printf("RECEIVED SIGNAL in P2 FROM P1 when right =: %d\n", si->si_pid, right);
-    if(right!=-1 && cntf>0){
-        cntf--;
+    printf("RECEIVED SIGNAL in P2 FROM P1 : %d when right =: %d\n", si->si_pid, right);
+    if(right!=-1){
         kill(right, SIGUSR1);
     }
 }
 
 void Righthandler(int sig, siginfo_t* si, void *uc){
     printf("RECEIVED SIGNAL in P2 FROM RIGHT : %d\n", sig);
-    if(right!=-1 && cntf>0){
-        cntf--;
-        kill(right, SIGUSR1);
+    if(left!=-1){
+        kill(left, SIGUSR2);
     }
 }
   
