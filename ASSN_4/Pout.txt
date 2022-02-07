@@ -1,0 +1,7 @@
+11
+1
+2
+
+of numbers 1 and 2 is : 3
+The sum of numbers 3 and 4 is : -1
+The product of numbers 5 and 6 is : 30
